@@ -1,0 +1,8 @@
+FROM golang
+
+WORKDIR /usr/src/app
+COPY go-webserver .
+
+EXPOSE 2112
+
+CMD ["./go-webserver"]

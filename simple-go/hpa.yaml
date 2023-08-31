@@ -1,0 +1,19 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: go-server
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: go-server
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+  - type: Pods
+    pods:
+      metric:
+        name: promhttp_metric_handler_requests_per_second
+      target:
+        type: Value
+        averageValue: 500m

@@ -1,0 +1,17 @@
+kind: ConfigMap
+metadata:
+  annotations:
+  name: custom-metrics-prometheus-adapter
+apiVersion: v1
+data:
+  config.yaml: |
+    rules:
+    - seriesQuery: 'promhttp_metric_handler_requests_total{kubernetes_namespace!="",kubernetes_pod_name!=""}'
+      resources:
+        overrides:
+          kubernetes_namespace: {resource: "namespace"}
+          kubernetes_pod_name: {resource: "pod"}      
+      name:
+        matches: "^(.*)_total"
+        as: "${1}_per_second"
+      metricsQuery: 'sum(rate(<<.Series>>{code="200"}[1m])) by (<<.GroupBy>>)'
