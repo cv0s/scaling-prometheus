@@ -4,6 +4,8 @@ For example, an application may need to scale due to open sockets.
 
 With the help of prometheus and the prometehus adapter it is possible to scale on all metrics you provide
 
+![flowchart of prometheus adapter](/image/prometheus.jpeg "Flowchart of prometheus adapter")
+
 # Install prometheus
 First we need to install prometheus 
 If there is already a prometheus instance in your Kubernetes cluster, you can use that. Otherwise you can use the prometheus.yaml
